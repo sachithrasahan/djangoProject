@@ -14,10 +14,6 @@ def addUser(request):
         form = UserProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # user = UserProfile()
-            # user.FirstName = firstName
-            # user.LastName = lastName
-            # user.save()
             return render(request, 'user_profile.html')
         else:
             return HttpResponse("Form is not valid.")
