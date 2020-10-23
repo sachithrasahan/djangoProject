@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from TestProfileApp.models import UserProfile
+from TestProfileApp.forms import UserProfileForm
 # Create your views here.
 def index(request):
     # return HttpResponse("Hello, world. You're at the polls index.")
@@ -10,13 +11,18 @@ def addUser(request):
     firstName = request.POST.get('FirstName')
     lastName = request.POST.get('LastName')
     if firstName and lastName:
-        user = UserProfile()
-        user.FirstName = firstName
-        user.LastName = lastName
-        user.save()
-        return render(request, 'user_profile.html')
-
-    return render(request, 'user_profile.html')
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # user = UserProfile()
+            # user.FirstName = firstName
+            # user.LastName = lastName
+            # user.save()
+            return render(request, 'user_profile.html')
+        else:
+            return HttpResponse("Form is not valid.")
+    else:
+        return HttpResponse("Fields are empty.")
 
 def getUserList(request):
     return render(request, 'user_list.html', {'userList' : UserProfile.objects.all()})

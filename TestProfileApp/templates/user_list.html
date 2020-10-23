@@ -28,6 +28,17 @@
                 background-color: #4CAF50;
                 color: white;
             }
+
+            #users img {
+                border: 2px solid #ddd;
+                border-radius: 10px;
+                padding: 5px;
+                width: 100px;
+            }
+
+            #users img:hover {
+                box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+            }
         </style>
     </head>
     <body>       
@@ -38,11 +49,17 @@
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Avatar</th>
                 </tr>
                 {% for user in userList %}
                 <tr>
                     <td>{{user.FirstName}}</td> 
                     <td>{{user.LastName}}</td> 
+                    <td>
+                        <a href="http://127.0.0.1:8000/media/{{user.ProfileImagePath}}" target= '_blank'>
+                            <image src="http://127.0.0.1:8000/media/{{user.ProfileImagePath}}">
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </table>

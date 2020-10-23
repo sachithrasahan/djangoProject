@@ -70,8 +70,9 @@
     <div class="container">
     <h2>User Profile Form</h2>
     <a href="http://127.0.0.1:8000/getUserList">View All Users</a>
-      <form action="/addUser" method='POST'> 
+      <form enctype="multipart/form-data" action="/addUser" method='POST'> 
       {% csrf_token %}
+      {{ form.as_p }}
       <div class="row">
         <div class="col-25">
           <label for="FirstName">First Name</label>
@@ -86,6 +87,14 @@
         </div>
         <div class="col-75">
           <input type="text" id="LastName" name="LastName" placeholder="Your last name..">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="ProfileImagePath">Avatar</label>
+        </div>
+        <div class="col-75">
+          <input type="file" name="ProfileImagePath" id="ProfileImagePath">
         </div>
       </div>
       <div class="row">
